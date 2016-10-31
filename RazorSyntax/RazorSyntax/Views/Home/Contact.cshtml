@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+@*<!-- Single Statement Block -->
+@{ var total = 7;}
+@{ var myMessage = "Hello World";}
+
+<!-- Inline Expressions -->
+<p>The value of total is: @total</p>
+<p>The value of my message is: @myMessage</p>
+
+<!-- Multi line statements -->
+@{
+    var greeting = "Welcome to my site!";
+    var dayOfWeek = DateTime.Now.DayOfWeek;
+    var greetingMessage = greeting + " Today is: " + dayOfWeek;
+    <p>The greeting is : @greetingMessage</p>
+}
+
+<p>The 2nd greeting is : @greetingMessage</p>
+
+<!-- Embedding a backslash in a string -->
+@{ var myFilePath = @"C:/MyFolder"; }
+@{ var quotes = @"The person said ""Hello"" to me";}
+
+<p>@quotes</p>*@
+
+@*<table style="border:2px solid Blue">
+    <tr style="border:2px solid Blue">
+        <td style="border:2px solid Blue">Requested URL</td>
+        <td style="border:2px solid Blue">Relative Path</td>
+        <td style="border:2px solid Blue">Full Path</td>
+        <td style="border:2px solid Blue">HTTP Request Type</td>
+    </tr>
+    <tr style="border:2px solid Blue">
+        <td style="border:2px solid Blue">@Request.Url</td>
+        <td style="border:2px solid Blue">@Request.FilePath</td>
+        <td style="border:2px solid Blue">@Request.MapPath(Request.FilePath)</td>
+        <td style="border:2px solid Blue">@Request.RequestType</td>
+    </tr>
+</table>*@
+
+@*@{
+    var result = "";
+    if (IsPost)
+    {
+        result = "This page was posted using the Submit Button.";
+    }
+    else
+    {
+        result = "This was the first request for this page.";
+    }
+}
+
+<form method="post" action="">
+    <input type="submit" name="Submit" value="Submit"/>
+    <p>@result</p>
+</form>*@
+
+@*@{
+    var sum = 0;
+    var sumMessage = "";
+
+    if(IsPost)
+    {
+        //Retrieve the numbers the user entered
+        var num1 = Request["text1"];
+        var num2 = Request["text2"];
+
+        sum = num1.AsInt() + num2.AsInt();
+        sumMessage = "The sum of your numbers is " + sum;
+    }
+}
+
+<p>Enter 2 numbers I will add them together</p>
+
+<form method="post" action="">
+    <p>
+        <label for="text1">First Number: </label>
+        <input type="text" name="text1" />
+    </p>
+    <p>
+        <label for="text2">Second Number: </label>
+        <input type="text" name="text2" />
+    </p>
+    <p>
+        <input type="submit" value="Add" />
+    </p>
+    <p>@sumMessage</p>
+</form>*@
+
+@*@for (int i = 0; i < 5; i++)
+{
+    <p>
+        <label>Inside my loop @i</label>
+    </p>
+}
+
+@{
+    List<string> myList = new List<string>();
+
+    for (int i = 0; i < 15; i++)
+    {
+        myList.Add(string.Format("Item number : {0}", i));
+    }
+}
+
+<p><strong>Starting the foreach loop</strong></p>
+@foreach (string s in myList)
+{
+    <p>Inside the foreach loop. The value is <strong>@s</strong></p>
+}*@
+
+@{
+    List<Employee> employees = new List<Employee>();
+
+    Employee emp1 = new Employee();
+    emp1.Name = "Ashton";
+    emp1.Email = "ashton@theironyard.com";
+    employees.Add(emp1);
+
+    emp1 = new Employee();
+    emp1.Name = "Sebastian";
+    emp1.Email = "sebastian@theironyard.com";
+    employees.Add(emp1);
+
+    emp1 = new Employee();
+    emp1.Name = "Jasmine";
+    emp1.Email = "jasmine@theironyard.com";
+    employees.Add(emp1);
+
+    emp1 = new Employee();
+    emp1.Name = "Christopher";
+    emp1.Email = "chrisyfur@theironyard.com";
+    employees.Add(emp1);
+
+}
+
+<table style="border:2px solid Blue">
+    <tr>
+        <th style="border:2px solid Blue">Name</th>
+        <th style="border:2px solid Red">Email</th>
+    </tr>
+    @for (int i = 0; i < employees.Count; i++)
+    {
+        <tr style="border:2px solid Blue">
+            <td style="border:2px solid Blue">@employees[i].Name</td>
+            <td style="border:2px solid Red">@employees[i].Email</td>
+        </tr>
+    }
+</table><br />
+<table style="border:2px solid Blue">
+    <tr>
+        <th style="border:2px solid Blue">Name</th>
+        <th style="border:2px solid Red">Email</th>
+    </tr>
+    @foreach (var emp in employees)
+    {
+        <tr style="border:2px solid Blue">
+            <td style="border:2px solid Blue">@emp.Name</td>
+            <td style="border:2px solid Red">@emp.Email</td>
+        </tr>
+    }
+</table>
